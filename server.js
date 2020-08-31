@@ -11,13 +11,15 @@ app.use(express.json());
 //routes
 const upload = require("./routes/upload.routes");
 app.use("/api/upload", upload);
+if (process.env.NODE_ENV === "production") {
+  const root = require("path").join(__dirname, "/client/build");
 
-const root = require("path").join(__dirname, "/client/build");
+  app.use(express.static(root));
+  app.get("*", (req, res) => {
+    res.sendFile("index.html", { root });
+  });
+}
 
-app.use(express.static(root));
-app.get("*", (req, res) => {
-  res.sendFile("index.html", { root });
-});
 // app.use(express.static("client/build"));
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
