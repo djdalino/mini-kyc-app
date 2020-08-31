@@ -1,0 +1,111 @@
+p {
+  margin: 0;
+}
+
+.bg-primary {
+  background-color: #3b5cf6 !important;
+}
+
+.box-h200 {
+  height: 200px;
+}
+.box-h210 {
+  height: 210px;
+}
+.box-h250 {
+  height: 250px;
+}
+.box-h260 {
+  height: 260px;
+}
+.box-h270 {
+  height: 270px;
+}
+.box-h300 {
+  height: 300px;
+}
+.box-h310 {
+  height: 310px;
+}
+.box-w185 {
+  width: 185px;
+}
+.box-w225 {
+  width: 225px;
+}
+.box-w250 {
+  width: 250px;
+}
+.box-w275 {
+  width: 255px;
+}
+.box-w300 {
+  width: 300px;
+}
+.box-335 {
+  width: 335px;
+}
+.py-10 {
+  padding: 10px 0;
+}
+.w-90 {
+  width: 90%;
+}
+.h-178 {
+  height: 178px;
+}
+.h-248 {
+  height: 238px;
+}
+.border-inner-box {
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+}
+
+.box-img {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.crop-container {
+  z-index: 1000;
+  top: 0;
+}
+.img-fluid {
+  width: 268px !important;
+  height: 178px !important;
+}
+
+#root
+  > div.position-fixed.crop-container.w-100.h-100.bg-light
+  > div
+  > div:nth-child(1) {
+  position: fixed !important;
+  top: 0;
+}
+#root
+  > div.position-fixed.crop-container.w-100.h-100.bg-light
+  > div
+  > div.text-center.m-5.position-fixed {
+  width: 75%;
+  bottom: 0;
+}
+
+.img-fluid-step-two-b {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.step-img-fluid {
+  max-width: 100%;
+  height: 100%;
+}
+.isLoading {
+  position: absolute;
+  left: 40%;
+  top: 40%;
+}
