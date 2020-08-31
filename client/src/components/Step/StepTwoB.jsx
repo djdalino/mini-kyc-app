@@ -78,12 +78,7 @@ const StepTwo = () => {
         <div className="px-1">
           <img src={CamPlus} alt="Cam Plus" height="22" width="22" />
         </div>
-        <h5
-          className="px-1 m-0"
-          style={{ color: "#3b5cf6", width: "6.5rem", fontSize: "20px" }}
-        >
-          Step 2
-        </h5>
+        <h5 className="px-1 m-0 valid-id">Step 2</h5>
         <h5
           className="px-1 m-0"
           style={{ color: "grey", fontSize: "20px", width: "auto" }}

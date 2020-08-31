@@ -109,3 +109,9 @@ p {
   left: 40%;
   top: 40%;
 }
+
+.valid-id {
+  color: "#3b5cf6";
+  width: "6.5rem";
+  font-size: "20px";
+}
