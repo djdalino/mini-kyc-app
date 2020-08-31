@@ -35,7 +35,7 @@ const StepOne = () => {
 
         data.append("upload", uploadVideo);
 
-        await axios.post(`/api/upload`, data, {
+        await axios.post("/api/upload", data, {
           headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))

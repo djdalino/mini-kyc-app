@@ -49,7 +49,7 @@ const StepTwo = () => {
         const data = new FormData();
 
         data.append("upload", stepTwoFileUploadB);
-        axios.post(`/api/upload`, data, {
+        axios.post("/api/upload", data, {
           headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
