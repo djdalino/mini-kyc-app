@@ -28,7 +28,6 @@ const StepOne = () => {
     } else {
       setIsLoading(true);
       try {
-        const local = "http://localhost:5000/api";
         // const LOCAL_BASE_URL = "http://localhost:1337";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
 
@@ -36,7 +35,7 @@ const StepOne = () => {
 
         data.append("upload", uploadVideo);
 
-        await axios.post(`${local}/upload`, data, {
+        await axios.post(`/api/upload`, data, {
           headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
