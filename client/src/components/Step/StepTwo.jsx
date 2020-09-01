@@ -63,6 +63,7 @@ const StepTwo = () => {
           setCount(count + 1);
           setUpload(null);
           setIsCount(0);
+          setPercent(0);
         }
       } catch (error) {
         alert(error);

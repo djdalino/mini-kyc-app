@@ -1,17 +1,21 @@
 import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import Hero from "./components/Hero/Hero";
-
-import SwitchPage from "./components/Common/SwitchPage";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SwitchPage from "./components/Pages/SwtichPages";
+import ViewPage from "./components/Pages/ViewPage";
 function App() {
   return (
-    <React.Fragment>
-      <Navbar />
-      <Hero data="Secure your account in 3 simple step" />
+    <Router>
+      <React.Fragment>
+        <Navbar />
 
-      <SwitchPage />
-    </React.Fragment>
+        <Switch>
+          <Route exact path="/" component={SwitchPage} />
+          <Route path="/view" component={ViewPage} />
+        </Switch>
+      </React.Fragment>
+    </Router>
   );
 }
 

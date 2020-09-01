@@ -45,7 +45,6 @@ const StepOne = () => {
 
         setIsLoading(false);
         setPercent(0);
-        alert("Image uploaded");
         setCount(count + 1);
       } catch (error) {
         alert(error);
