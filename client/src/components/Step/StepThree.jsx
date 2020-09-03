@@ -37,11 +37,15 @@ const StepOne = () => {
         // const LOCAL_BASE_URL = "http://localhost:1337";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
         const STRAPI_BASE_URL = "http://64.227.98.23";
-        const data = new FormData();
 
         const userId = jwt.decode(itemToken);
+        const data = new FormData();
         data.append("userId", userId._id);
         data.append("upload", uploadVideo);
+        // const data = {
+        //   userId: userId._id,
+        //   upload: uploadVideo
+        // };
         await axios.post(`${STRAPI_BASE_URL}/api/upload`, data, {
           headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>

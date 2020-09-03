@@ -55,6 +55,10 @@ const StepTwo = () => {
         const data = new FormData();
         data.append("userId", userId._id);
         data.append("upload", stepTwoFileUploadB);
+        // const data = {
+        //   userId: userId._id,
+        //   upload: stepTwoFileUploadB
+        // };
         await axios.post(`${STRAPI_BASE_URL}/api/upload`, data, {
           headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>

@@ -43,7 +43,10 @@ const StepOne = () => {
         const data = new FormData();
         data.append("userId", userId._id);
         data.append("upload", selfieUpload);
-
+        // const data = JSON.stringify({
+        //   userId: userId._id,
+        //   upload: selfieUpload
+        // });
         await axios.post(`${STRAPI_BASE_URL}/api/upload`, data, {
           headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>

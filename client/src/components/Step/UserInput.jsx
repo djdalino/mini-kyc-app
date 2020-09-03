@@ -21,12 +21,13 @@ const UserInput = () => {
     } else {
       try {
         // const local = "http://localhost:5000";
+        const STRAPI_BASE_URL = "http://64.227.98.23";
         const data = {
           first_name: first_name,
           last_name: last_name,
           email: email
         };
-        const res = await axios.post(`/api/user`, data);
+        const res = await axios.post(`${STRAPI_BASE_URL}/api/user`, data);
         localStorage.setItem("token", JSON.stringify(res.data.token));
         setCount(count + 1);
       } catch (error) {
