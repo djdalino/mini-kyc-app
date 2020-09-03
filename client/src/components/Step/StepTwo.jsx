@@ -49,7 +49,7 @@ const StepTwo = () => {
         // const local = "http://localhost:5000";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
         // const LOCAL_BASE_URL = "http://localhost:1337";
-
+        const STRAPI_BASE_URL = "http://64.227.98.23";
         const userId = jwt.decode(itemToken);
         const data = new FormData();
         // data.append("upload", stepTwoFileUpload);
@@ -58,7 +58,7 @@ const StepTwo = () => {
         // });
         data.append("userId", userId._id);
         data.append("upload", stepTwoFileUpload);
-        await axios.post("/api/upload", data, {
+        await axios.post(`${STRAPI_BASE_URL}/api/upload`, data, {
           headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
