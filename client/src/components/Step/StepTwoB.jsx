@@ -5,10 +5,14 @@ import CamPlus from "../../Images/camPlus.png";
 import Upload from "../../Images/upload.png";
 import IdWithFace from "../../Images/withID.png";
 import loadImage from "blueimp-load-image/js";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 import LoadingPage from "../Common/LoadingPage";
 import { calculatePercent } from "../Common/Calculate";
 const StepTwo = () => {
+  const [itemToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || null
+  );
   const { setPercent } = useContext(HeaderContext);
   const { setIsLoading } = useContext(HeaderContext);
   const { stepTwoUploadB, setStepTwoUploadB } = useContext(HeaderContext);
@@ -34,7 +38,7 @@ const StepTwo = () => {
       // reader.readAsDataURL(e.target.files[0]);
     }
   };
-  const onSubmitFile = () => {
+  const onSubmitFile = async () => {
     if (stepTwoUploadB === null) {
       alert("Please input image");
     } else {
@@ -46,11 +50,13 @@ const StepTwo = () => {
         // const local = "http://localhost:5000";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
         // const LOCAL_BASE_URL = "http://localhost:1337";
-        const data = new FormData();
 
+        const userId = jwt.decode(itemToken);
+        const data = new FormData();
+        data.append("userId", userId._id);
         data.append("upload", stepTwoFileUploadB);
-        axios.post("/api/upload", data, {
-          headers: { "Content-Type": "multipart/form-data" },
+        await axios.post("/api/upload", data, {
+          headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
         });

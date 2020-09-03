@@ -2,7 +2,10 @@ import React from "react";
 import CamPlus from "../../Images/camPlus.png";
 const Step = ({ step, data }) => {
   return (
-    <div className="d-flex align-items-center justify-content-center my-3 mb-4 px-2">
+    <div
+      className="d-flex align-items-center justify-content-center my-3 mb-4 px-2"
+      style={{ maxWidth: "375px" }}
+    >
       <div className="px-1">
         <img src={CamPlus} alt="Cam Plus" height="25" width="25" />
       </div>

@@ -5,8 +5,12 @@ import Upload from "../../Images/upload.png";
 import HeaderContext from "../../context/HeaderContext";
 import LoadingPage from "../Common/LoadingPage";
 import { calculatePercent } from "../Common/Calculate";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 const StepOne = () => {
+  const [itemToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || null
+  );
   const { setPercent } = useContext(HeaderContext);
   const { setIsLoading } = useContext(HeaderContext);
   const { stepOneUpload, setStepOneUpload } = useContext(HeaderContext);
@@ -35,10 +39,13 @@ const StepOne = () => {
         // const local = "http://localhost:5000";
         // const LOCAL_BASE_URL = "http://localhost:1337";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
+        const userId = jwt.decode(itemToken);
         const data = new FormData();
+        data.append("userId", userId._id);
         data.append("upload", selfieUpload);
+
         await axios.post("/api/upload", data, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
         });

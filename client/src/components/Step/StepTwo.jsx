@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import HeaderContext from "../../context/HeaderContext";
 // import CropImage from "../CropImage/Index";
 import Step from "../Common/Step";
@@ -7,16 +7,20 @@ import Upload from "../../Images/upload.png";
 // import loadImage from "blueimp-load-image/js";
 import LoadingPage from "../Common/LoadingPage";
 import { calculatePercent } from "../Common/Calculate";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 const StepTwo = () => {
+  const [itemToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || null
+  );
   const { setPercent } = useContext(HeaderContext);
   const { setIsLoading } = useContext(HeaderContext);
   const { upload, setUpload } = useContext(HeaderContext);
-  const { setSrc } = useContext(HeaderContext);
+  //const { setSrc } = useContext(HeaderContext);
   const { setCrop } = useContext(HeaderContext);
   const { count, setCount } = useContext(HeaderContext);
   const [isCount, setIsCount] = React.useState(0);
-  const { stepTwoFileUpload } = useContext(HeaderContext);
+  const { stepTwoFileUpload, setStepTwoFileUpload } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -24,11 +28,12 @@ const StepTwo = () => {
   const handleFileOnChange = e => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
-      reader.addEventListener("load", () => setSrc(reader.result));
+      reader.addEventListener("load", () => setUpload(reader.result));
       reader.readAsDataURL(e.target.files[0]);
+      setStepTwoFileUpload(e.target.files[0]);
     }
   };
-  const onSubmitFile = () => {
+  const onSubmitFile = async () => {
     if (upload === null) {
       alert("Please input image");
     } else {
@@ -44,13 +49,17 @@ const StepTwo = () => {
         // const local = "http://localhost:5000";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
         // const LOCAL_BASE_URL = "http://localhost:1337";
+
+        const userId = jwt.decode(itemToken);
         const data = new FormData();
-        data.append("upload", stepTwoFileUpload);
+        // data.append("upload", stepTwoFileUpload);
         // stepTwoFileUpload.forEach(async item => {
         //   data.append("files", item);
         // });
-        axios.post("/api/upload", data, {
-          headers: { "Content-Type": "multipart/form-data" },
+        data.append("userId", userId._id);
+        data.append("upload", stepTwoFileUpload);
+        await axios.post("/api/upload", data, {
+          headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
         });

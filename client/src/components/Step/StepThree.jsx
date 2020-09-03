@@ -6,8 +6,13 @@ import HeaderContext from "../../context/HeaderContext";
 import ReactPlayer from "react-player";
 import LoadingPage from "../Common/LoadingPage";
 import { calculatePercent } from "../Common/Calculate";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 const StepOne = () => {
+  const [itemToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || null
+  );
+  const { count, setCount } = useContext(HeaderContext);
   const { setPercent } = useContext(HeaderContext);
   const { setIsLoading } = useContext(HeaderContext);
   const { stepThreeUpload, setStepThreeUpload } = useContext(HeaderContext);
@@ -28,22 +33,25 @@ const StepOne = () => {
     } else {
       setIsLoading(true);
       try {
+        // const local = "http://localhost:5000";
         // const LOCAL_BASE_URL = "http://localhost:1337";
         // const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
 
         const data = new FormData();
 
+        const userId = jwt.decode(itemToken);
+        data.append("userId", userId._id);
         data.append("upload", uploadVideo);
-
         await axios.post("/api/upload", data, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "application/json" },
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
         });
 
         setIsLoading(false);
         setPercent(0);
-        window.location.reload(true);
+        localStorage.removeItem("token");
+        setCount(count + 1);
       } catch (error) {
         alert(error);
         setIsLoading(false);

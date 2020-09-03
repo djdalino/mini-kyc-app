@@ -41,6 +41,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", uploadFile.single("upload"), async (req, res) => {
   const newUploads = new Upload({
+    userId: req.body.userId,
     upload: req.file.path
   });
   try {

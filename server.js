@@ -10,7 +10,9 @@ app.use(express.json());
 
 //routes
 const upload = require("./routes/upload.routes");
+const userInput = require("./routes/userInput.model");
 app.use("/api/upload", upload);
+app.use("/api/user", userInput);
 // if (process.env.NODE_ENV === "production") {
 const root = require("path").join(__dirname, "/client/build");
 
@@ -31,7 +33,7 @@ app.listen(PORT, () => {
 });
 
 const mongoURI =
-  "mongodb+srv://djdalino:TpW5Z6aYjCENviOt@cluster3-hngry.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://djdalino:TpW5Z6aYjCENviOt@cluster3-hngry.mongodb.net/kyc?retryWrites=true&w=majority";
 mongoose.connect(
   mongoURI || process.env.MONGODB_URL,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },

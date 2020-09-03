@@ -10,7 +10,7 @@
     "build": "cd client && npm build",
     "install-client": "cd client && npm install",
     "install-server": "npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
     "multer": "^1.4.2",
     "nodemon": "^2.0.4",
